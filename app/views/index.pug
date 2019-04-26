@@ -1,0 +1,27 @@
+html
+  head
+    title= title
+    script(src='//cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js')
+    style
+      include style.css
+  body
+    h1= message
+    div
+      img(src='/public/button.png')
+      span(id='counter')
+      span(id='latency')
+    script(type='text/javascript').
+      var counter = 0
+      var responseTime = 0
+      $('img').click(function() {
+        counter++;
+        var start = Date.now();
+        $('#counter').html(counter);
+        console.log('img clicked');
+        $.get('/action', function(data) { 
+          // $('#message-text').text(data);
+          responseTime = Date.now() - start;
+          $('#latency').html(responseTime + 'ms');
+        });
+      });
+      

@@ -1,0 +1,39 @@
+body {
+    box-sizing: border-box;
+    color: #606c76;
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1.6em;
+    font-weight: 300;
+    letter-spacing: .01em;
+    line-height: 1.6;
+}
+
+img {
+    display: block;
+    padding: 50px;
+    margin: auto;
+    max-width: 75%;
+}
+
+h1 {
+    color: #606c76;
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    text-align: center;
+    display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-size: 4.6rem;
+    line-height: 1.2;
+}
+
+#counter {
+    display: block;
+    text-align: center;
+}
+
+#latency {
+    display: block;
+    text-align: center;
+}
