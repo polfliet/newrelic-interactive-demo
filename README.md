@@ -17,7 +17,7 @@ kubectl describe service frontend
 
 
 # configure autoscaling
-kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=5
+kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=10
 
 # check horizontal pod autoscaler
 kubectl get hpa --watch

@@ -46,6 +46,10 @@ spec:
               key: new_relic_license_key
         - name: NEW_RELIC_APP_NAME
           value: New Relic Kubernetes Demo - Frontend
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: GET_HOSTS_FROM
           value: dns
           # If your cluster config does not include a dns service, then to

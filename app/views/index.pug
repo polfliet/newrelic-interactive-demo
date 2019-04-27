@@ -10,18 +10,58 @@ html
       img(src='/public/button.png')
       span(id='counter')
       span(id='latency')
+      span(id='podname')
     script(type='text/javascript').
-      var counter = 0
-      var responseTime = 0
-      $('img').click(function() {
-        counter++;
-        var start = Date.now();
-        $('#counter').html(counter);
-        console.log('img clicked');
-        $.get('/action', function(data) { 
-          // $('#message-text').text(data);
-          responseTime = Date.now() - start;
-          $('#latency').html(responseTime + 'ms');
+      var counter = 0;
+      var responseTime = 0;
+      var enabled = true;
+      var clickspeed = 1000;
+      
+      function createUUID() {
+        var dt = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (dt + Math.random()*16)%16 | 0;
+            dt = Math.floor(dt/16);
+            return (c=='x' ? r :(r&0x3|0x8)).toString(16);
         });
+        return uuid;
+      }
+      document.cookie = 'id=' + createUUID();
+
+      function disableButton() {
+        $('h1').text('Wait...');
+        enabled = false;
+        $('img').addClass('disabled');
+      }
+
+      function enableButton() {
+        $('h1').text('Push!');
+        enabled = true;
+        $('img').removeClass('disabled');
+      }
+
+      $('img').click(function() {
+        if (enabled == true) {
+          disableButton();  
+          counter++;
+          var start = Date.now();
+          $('#counter').html(counter);
+          console.log('img clicked');
+          $.get('/action', function(data) { 
+            var result = data.split(':')
+            var podname = result[0];
+            clickspeed = result[1];
+
+            // Update text
+            $('#podname').text(podname);
+            responseTime = Date.now() - start;
+            $('#latency').html(responseTime + 'ms');
+
+            // Enable button again after
+            setTimeout(function() {
+              enableButton();
+            }, clickspeed);
+          });
+        }
       });
       
