@@ -1,36 +1,36 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: game-frontend 
   labels:
-    app: demo
+    app: game
     tier: frontend
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 3000
   selector:
-    app: demo
+    app: game 
     tier: frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: frontend
+  name: game-frontend
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: demo
+        app: game
         tier: frontend
     spec:
       containers:
       - name: frontend
-        #image: docker.io/spolfliet/newrelic-k8s-guestbook-frontend:latest
-        image: polfliet/newrelic-kubernetes-demo:latest
-        imagePullPolicy: Never 
+        image: docker.io/spolfliet/newrelic-interactive-demo-frontend:latest
+        #image: polfliet/newrelic-interactive-demo-frontend:latest
+        #imagePullPolicy: Never 
         resources:
           requests:
             cpu: 100m
