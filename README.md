@@ -24,15 +24,18 @@ See https://docs.newrelic.com/docs/integrations/kubernetes-integration/installat
 
 ### Install New Relic metadata injection
 For more details, check https://docs.newrelic.com/docs/integrations/kubernetes-integration/metadata-injection/kubernetes-apm-metadata-injection
-```kubectl apply -f k8s-metadata-injection-latest.yaml
+```
+kubectl apply -f k8s-metadata-injection-latest.yaml
 ```
 
 ### Install New Relic Kubernetes integration
 For more details, check https://docs.newrelic.com/docs/integrations/kubernetes-integration/installation/kubernetes-installation-configuration
-```kubectl create -f newrelic-infrastructure-k8s-latest.yaml
+```
+kubectl create -f newrelic-infrastructure-k8s-latest.yaml
 ```
 Check if the newrelic-infra daemonset and pod is running
-```kubectl get daemonsets
+```
+kubectl get daemonsets
 kubectl get pods
 ```
 
@@ -40,7 +43,8 @@ kubectl get pods
 ## Horizontal Pod Autoscaling (HPA)
 ### Install metrics-server (HPA uses this for determining when to scale the pod)
 This requires helm to be installed. For EKS, see instructions here: https://eksworkshop.com/helm_root/helm_intro/
-```helm install stable/metrics-server --name metrics-server --version 2.0.4 --namespace metrics
+```
+helm install stable/metrics-server --name metrics-server --version 2.0.4 --namespace metrics
 ```
 
 ### Configure autoscaling
@@ -51,7 +55,8 @@ This requires helm to be installed. For EKS, see instructions here: https://eksw
 
 
 ## Clean-up
-```kubectl delete -f game.yaml
+```
+kubectl delete -f game.yaml
 kubectl delete -f kube-state-metrics-release-1.5/kubernetes/
 kubectl delete -f newrelic-infrastructure-k8s-latest.yaml
 kubectl delete hpa game-frontend
