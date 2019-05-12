@@ -5,14 +5,16 @@ Make sure you have a Kubernetes cluster
 
 Need an AWS EKS cluster?
 * Use the AWS Quick Start: https://aws.amazon.com/quickstart/architecture/new-relic-infrastructure/
-* Or following this tutorial: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
+* Or follow this tutorial: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
 
 ## Deploying the demo
 ### Deploy the demo game to the Kubernetes cluster
 `kubectl create -f game.yaml`
 
 ### Check where the service is running
-`kubectl describe service game-frontend`
+```
+kubectl describe service game-frontend
+```
 Copy the LoadBalancer Ingress address and paste in your browser to try out the demo game
 
 ## Deploying New Relic
