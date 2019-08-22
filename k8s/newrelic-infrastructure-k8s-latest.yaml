@@ -61,7 +61,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: newrelic-infra
-          image: newrelic/infrastructure-k8s:1.8.0
+          image: newrelic/infrastructure-k8s:1.9.4
           resources:
             limits:
               memory: 150M
@@ -76,7 +76,7 @@ spec:
               name: host-docker-socket
           env:
             - name: "CLUSTER_NAME"
-              value: "New Relic Push Game"
+              value: "New Relic Game"
             - name: "NRIA_LICENSE_KEY"
               valueFrom:
                 secretKeyRef:

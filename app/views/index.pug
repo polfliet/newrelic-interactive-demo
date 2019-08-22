@@ -7,7 +7,7 @@ html
   body
     h1= message
     div
-      img(src='/public/button.png')
+      img(src='/public/button-nr.png')
       span(id='counter')
       span(id='latency')
       span(id='podname')
@@ -47,7 +47,7 @@ html
           var start = Date.now();
           $('#counter').html(counter);
           console.log('img clicked');
-          $.get('/action', function(data) { 
+          $.ajax({'url': '/action', 'success': function(data) { 
             var result = data.split(':')
             var podname = result[0];
             clickspeed = result[1];
@@ -61,7 +61,15 @@ html
             setTimeout(function() {
               enableButton();
             }, clickspeed);
-          });
+          }, 'error': function(data) {
+            $('#podname').text('ERROR - TRY AGAIN');
+            responseTime = Date.now() - start;
+            $('#latency').html(responseTime + 'ms');
+            // Enable button again after
+            setTimeout(function() {
+              enableButton();
+            }, 1000);
+          }});
         }
       });
       
