@@ -9,7 +9,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: process.env.NEW_RELIC_APP_NAME,
+  app_name: 'FutureStack Game',
   /**
    * Your New Relic license key.
    */

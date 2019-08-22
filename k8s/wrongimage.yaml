@@ -1,37 +1,20 @@
 # This is just a dummy service to populate the Kubernetes cluster explorer
-apiVersion: v1
-kind: Service
-metadata:
-  name: game-frontend 
-  labels:
-    app: game
-    tier: frontend
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 3000
-  selector:
-    app: game 
-    tier: frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: game-frontend
+  name: game-analytics
 spec:
-  replicas: 5
+  replicas: 1
   template:
     metadata:
       labels:
         app: game
-        tier: frontend
+        tier: analytics
     spec:
       containers:
-      - name: frontend
-        #image: docker.io/spolfliet/newrelic-interactive-demo-frontend:latest
-        image: polfliet/newrelic-interactive-demo-frontend:latest
-        imagePullPolicy: Never 
+      - name: analytics
+        image: docker.io/spolfliet/newrelic-interactive-demo-analytics:unknown
         resources:
           requests:
             cpu: 100m
@@ -46,7 +29,7 @@ spec:
               name: newrelic-secret
               key: new_relic_license_key
         - name: NEW_RELIC_APP_NAME
-          value: FutureStack Game - Frontend
+          value: FutureStack Game - Analytics
         - name: MY_POD_NAME
           valueFrom:
             fieldRef:

@@ -31,15 +31,15 @@ app.get('/throttle', function (req, res) {
 app.get('/action', function (req, res) {
     var cookie = req['headers']['cookie'];
     cookieMap[cookie] = true;
-    console.log(' [x] User id: ' + cookie + ' action triggered');
-    console.log(' [x] Total users: ' + getNumberOfUsers());
+    console.log('[debug] User id: ' + cookie + ' action triggered');
+    console.log('[info] Total users: ' + getNumberOfUsers());
     checkUserAgent(req);
     lookBusy();
     return res.status(200).send(process.env.MY_POD_NAME + ':' + clickSpeed);
 });
 
 app.listen(process.env.PORT || 3000, function () {
-    console.log('Frontend ' + process.env.NEW_RELIC_METADATA_KUBERNETES_POD_NAME + ' listening on port 3000!');
+    console.log('[info] Frontend ' + process.env.NEW_RELIC_METADATA_KUBERNETES_POD_NAME + ' listening on port 3000!');
 });
 
 // Do some heavy calculations
@@ -56,7 +56,7 @@ var lookBusy = function() {
 // Trigger an exception in x% of the Android devices
 var checkUserAgent = function(req) {
     var userAgent = req.headers['user-agent'];
-    console.log('User agent:' + userAgent);
+    console.log('[debug] User agent:' + userAgent);
     if (userAgent.toLowerCase().indexOf('android') != -1) {
         if (Math.random() * 100 < 20) { // 20% of the Android devices
             console.error('Error exception: Failed to parse user-agent "' + userAgent + '"');
