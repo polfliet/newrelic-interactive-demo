@@ -29,9 +29,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        #image: docker.io/spolfliet/newrelic-interactive-demo-frontend:latest
-        image: polfliet/newrelic-interactive-demo-frontend:latest
-        imagePullPolicy: Never 
+        image: docker.io/spolfliet/newrelic-interactive-demo-frontend:latest
+        #image: polfliet/newrelic-interactive-demo-frontend:latest
+        #imagePullPolicy: Never 
         resources:
           requests:
             cpu: 100m
