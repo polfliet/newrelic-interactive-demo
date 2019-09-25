@@ -29,7 +29,16 @@ For more details, check https://docs.newrelic.com/docs/integrations/kubernetes-i
 ```
 kubectl apply -f k8s-metadata-injection-latest.yaml
 ```
+The extension api server CA bundle is not stored in the same place as a vanilla kubernetes distribution. 
 
+This requires customers to follow these additional instructions **after the automatic management setup steps**:
+
+1. Go to the EKS page of your cluster and copy the value in the `Certificate authority` field.
+2. On a terminal, run: 
+
+    caBundle=<PASTE_CERTIFICATE_AUTHORITY>
+    kubectl patch mutatingwebhookconfiguration newrelic-metadata-injection-cfg --type='json' -p "[{'op': 'replace', 'path': '/webhooks/0/clientConfig/caBundle', 'value':'${caBundle}'}]"
+    
 ### Install New Relic Kubernetes integration
 For more details, check https://docs.newrelic.com/docs/integrations/kubernetes-integration/installation/kubernetes-installation-configuration
 ```
